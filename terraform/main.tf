@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.region
-}
-
 module "network" {
   source          = "./modules/network"
   service_name    = var.service_name
