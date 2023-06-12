@@ -8,5 +8,5 @@ ecs_cluster_name = "my-ecs-cluster"
 ecs_service_name = "my-ecs-service"
 db_name          = "my-db-instance"
 username         = "admin"
-password         = "password"  # 本番環境では安全なパスワードを設定してください
+password         = "password" # 本番環境では安全なパスワードを設定してください
 log_group_name   = "my-log-group"
