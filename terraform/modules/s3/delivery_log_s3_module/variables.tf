@@ -5,3 +5,7 @@ variable "service_name" {
 variable "env" {
   description = "ENV for service"
 }
+
+variable "target_name" {
+  description = "Name for log service"
+}
