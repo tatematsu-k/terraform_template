@@ -95,6 +95,8 @@ jobs:
       - name: Terraform tfsec
         id: tfsec
         uses: aquasecurity/tfsec-action@v1.0.0
+        with:
+          additional_args: "--exclude-downloaded-modules"
 
   security_checkov:
     name: 'secyrity check for checkov'
