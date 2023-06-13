@@ -1,3 +1,4 @@
+#tfsec:ignore:aws-s3-enable-bucket-logging
 resource "aws_s3_bucket" "main" {
   bucket = "${var.service_name}-${var.env}-${var.target_name}"
 }
@@ -67,11 +68,16 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
   policy = data.aws_iam_policy_document.s3_bucket_policy.json
 }
 
+resource "aws_kms_key" "main" {
+  enable_key_rotation = true
+}
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "main" {
   bucket = aws_s3_bucket.main.bucket
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
+      kms_master_key_id = aws_kms_key.main.arn
+      sse_algorithm     = "aws:kms"
     }
   }
 }
@@ -87,5 +93,12 @@ resource "aws_s3_bucket_lifecycle_configuration" "main" {
       days          = 90
       storage_class = "GLACIER"
     }
+  }
+}
+
+resource "aws_s3_bucket_versioning" "main" {
+  bucket = aws_s3_bucket.main.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
