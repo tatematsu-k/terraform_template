@@ -15,7 +15,7 @@ module "vpc" {
 
   # vpc flow log
   enable_flow_log           = true
-  flow_log_destination_type = s3
+  flow_log_destination_type = "s3"
   flow_log_destination_arn  = var.flow_log_s3_arn
   flow_log_file_format      = "parquet"
   flow_log_traffic_type     = "ALL"
