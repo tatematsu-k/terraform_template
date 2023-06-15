@@ -1,3 +1,4 @@
+#checkov:skip=CKV2_AWS_5:
 #tfsec:ignore:aws-s3-enable-bucket-logging
 resource "aws_s3_bucket" "main" {
   bucket = "${var.service_name}-${var.env}-${var.target_name}"
